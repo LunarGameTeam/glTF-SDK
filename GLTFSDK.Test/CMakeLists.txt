@@ -27,9 +27,9 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 target_include_directories(GLTFSDK.Test
-    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/Inc"
-    PRIVATE "${CMAKE_SOURCE_DIR}/Built/Int"
-    PRIVATE "${CMAKE_CURRENT_LIST_DIR}"
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/Inc>
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/Built/Int>
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}>
 )
 
 target_link_libraries(GLTFSDK.Test
@@ -44,4 +44,4 @@ add_custom_command(TARGET GLTFSDK.Test
 AddGLTFIOSAppProperties(GLTFSDK.Test)
 CreateGLTFInstallTargets(GLTFSDK.Test ${Platform})
 
-install(FILES ${PROJECT_BINARY_DIR}/$<CONFIG>/Resources/ DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${Platform}/$<CONFIG>/${PROJECT_NAME}/Resources)
+install(FILES ${PROJECT_BINARY_DIR}/$<CONFIG>/Resources/ DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)

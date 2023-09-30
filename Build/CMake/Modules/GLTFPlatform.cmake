@@ -55,14 +55,15 @@ endfunction(GetGLTFPlatform)
 function(CreateGLTFInstallTargets target platform)
 
     install(TARGETS ${target}
-        ARCHIVE DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${platform}/$<CONFIG>/${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${platform}/$<CONFIG>/${PROJECT_NAME}
-        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${platform}/$<CONFIG>/${PROJECT_NAME}
-        BUNDLE DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${platform}/$<CONFIG>/${PROJECT_NAME}
+        EXPORT ${target}Targets
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+        LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+        BUNDLE DESTINATION  ${CMAKE_INSTALL_PREFIX}/bin
     )
 
     if (MSVC)
-        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${PROJECT_NAME}.pdb DESTINATION ${CMAKE_SOURCE_DIR}/Built/Out/${platform}/$<CONFIG>/${PROJECT_NAME})
+        install(FILES ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/${PROJECT_NAME}.pdb DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
     endif()
 
 endfunction(CreateGLTFInstallTargets)

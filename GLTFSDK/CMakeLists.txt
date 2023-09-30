@@ -55,9 +55,33 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 target_include_directories(GLTFSDK
-    PUBLIC "${CMAKE_CURRENT_LIST_DIR}/Inc"
-    PRIVATE "${CMAKE_SOURCE_DIR}/Built/Int"
-    PRIVATE "${CMAKE_BINARY_DIR}/GeneratedFiles"
+    PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/Inc>
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/Built/Int>
+    PRIVATE $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/GeneratedFiles>
+    $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>
 )
 
+include(CMakePackageConfigHelpers)
+
+set(LIB_PROJECT_NAME ms-gltf)
+
+write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}ConfigVersion.cmake
+        VERSION "1111"
+        COMPATIBILITY SameMajorVersion)
+
+configure_package_config_file(
+        Config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}Config.cmake
+        INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_PROJECT_NAME}")
+        
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}Config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}ConfigVersion.cmake
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_PROJECT_NAME}")
+
 CreateGLTFInstallTargets(GLTFSDK ${Platform})
+
+install(
+    EXPORT GLTFSDKTargets 
+    FILE GLTFSDKTargets.cmake
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_PROJECT_NAME}"
+ )
