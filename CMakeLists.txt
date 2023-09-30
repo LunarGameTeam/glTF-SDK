@@ -72,3 +72,11 @@ if(ENABLE_SAMPLES)
 endif()
 
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/Inc/GLTFSDK DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+
+configure_package_config_file(
+        Config.cmake.in ${PROJECT_NAME}Config.cmake
+        INSTALL_DESTINATION "share/${PROJECT_NAME}")
+        
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}")
