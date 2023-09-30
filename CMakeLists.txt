@@ -73,6 +73,8 @@ endif()
 
 install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/Inc/GLTFSDK DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
+include(CMakePackageConfigHelpers)
+
 configure_package_config_file(
         Config.cmake.in ${PROJECT_NAME}Config.cmake
         INSTALL_DESTINATION "share/${PROJECT_NAME}")
