@@ -71,9 +71,14 @@ if(ENABLE_SAMPLES)
     add_subdirectory(GLTFSDK.Samples)
 endif()
 
-install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/Inc/GLTFSDK DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/GLTFSDK/Inc/GLTFSDK DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 
 include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+        VERSION "1111"
+        COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
         Config.cmake.in ${PROJECT_NAME}Config.cmake
