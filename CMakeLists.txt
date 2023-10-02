@@ -75,15 +75,17 @@ install(DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/GLTFSDK/Inc/GLTFSDK DESTINATION ${CM
 
 include(CMakePackageConfigHelpers)
 
+set(LIB_PROJECT_NAME ms-gltf)
+
 write_basic_package_version_file(
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}ConfigVersion.cmake
         VERSION "1111"
         COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-        Config.cmake.in ${PROJECT_NAME}Config.cmake
-        INSTALL_DESTINATION "share/${PROJECT_NAME}")
+        Config.cmake.in ${LIB_PROJECT_NAME}Config.cmake
+        INSTALL_DESTINATION "share/${LIB_PROJECT_NAME}")
         
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}")
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}Config.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}ConfigVersion.cmake
+        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/${LIB_PROJECT_NAME}")
