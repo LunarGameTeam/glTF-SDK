@@ -83,9 +83,9 @@ write_basic_package_version_file(
         COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-        Config.cmake.in ${LIB_PROJECT_NAME}Config.cmake
-        INSTALL_DESTINATION "share/${LIB_PROJECT_NAME}")
+        Config.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}Config.cmake
+        INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_PROJECT_NAME}")
         
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}Config.cmake
         ${CMAKE_CURRENT_BINARY_DIR}/${LIB_PROJECT_NAME}ConfigVersion.cmake
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/${LIB_PROJECT_NAME}")
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${LIB_PROJECT_NAME}")
